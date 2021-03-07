@@ -1,0 +1,11 @@
+<?php
+
+use drupol\PhpCsFixerConfigsPhp\Config\Php73;
+
+$config = Php73::create();
+
+$rules = $config->getRules();
+
+$rules['strict_comparison'] = false;
+
+return $config->setRules($rules);

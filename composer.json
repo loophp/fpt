@@ -1,0 +1,47 @@
+{
+    "name": "loophp/fpt",
+    "type": "library",
+    "description": "Functional programming toolbox for PHP.",
+    "keywords": [
+        "functional-programming",
+        "toolbox"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pol Dellaiera",
+            "email": "pol.dellaiera@protonmail.com"
+        }
+    ],
+    "require": {
+        "php": ">= 7.4"
+    },
+    "require-dev": {
+        "drupol/php-conventions": "^3.0.2",
+        "friends-of-phpspec/phpspec-code-coverage": "^6",
+        "infection/infection": "^0.21.0",
+        "infection/phpspec-adapter": "^0.1.1",
+        "phpspec/phpspec": "^7",
+        "phpstan/phpstan-strict-rules": "^0.12",
+        "vimeo/psalm": "^4"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "loophp\\fpt\\": "./src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "loophp\\fpt\\benchmarks\\": "./benchmarks/",
+            "spec\\loophp\\fpt\\": "./spec/loophp/fpt/"
+        }
+    },
+    "scripts": {
+        "grumphp": "vendor/bin/grumphp run",
+        "infection": "vendor/bin/infection run -j 2",
+        "phpspec": "vendor/bin/phpspec run"
+    }
+}

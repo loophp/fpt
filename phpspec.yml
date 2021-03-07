@@ -1,0 +1,12 @@
+formatter.name: pretty
+extensions:
+  FriendsOfPhpSpec\PhpSpec\CodeCoverage\CodeCoverageExtension:
+    format:
+      - clover
+      - php
+      - text
+      - html
+    output:
+      html: build/coverage
+      clover: build/logs/clover.xml
+      php: build/coverage.php
