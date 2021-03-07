@@ -1,0 +1,16 @@
+imports:
+  - { resource: vendor/drupol/php-conventions/config/php73/grumphp.yml }
+
+parameters:
+  tasks.phpcsfixer.config: .php_cs.dist
+  extra_tasks:
+    psalm:
+      show_info: true
+    phpspec:
+      verbose: true
+    infection:
+      threads: 10
+      test_framework: phpspec
+      configuration: infection.json
+      min_msi: 80
+      min_covered_msi: 80
