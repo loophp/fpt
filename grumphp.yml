@@ -1,0 +1,17 @@
+imports:
+    - { resource: vendor/drupol/php-conventions/config/php73/grumphp.yml }
+
+parameters:
+    tasks.license.holder: Pol Dellaiera
+    tasks.license.date_from: 2021
+    tasks.phpcsfixer.config: .php_cs.dist
+    tasks.phpstan.configuration: phpstan.neon
+    extra_tasks:
+        phpspec:
+            verbose: true
+        infection:
+            threads: 1
+            test_framework: phpspec
+            configuration: infection.json
+            min_msi: 95
+            min_covered_msi: 95
