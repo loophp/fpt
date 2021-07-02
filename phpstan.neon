@@ -1,8 +1,2 @@
-parameters:
-	ignoreErrors:
-		-
-			message: '#Foreach overwrites \$ifEmpty with its value variable.#'
-			path: src/End.php
-		-
-			message: '#Foreach overwrites \$ifEmpty with its value variable.#'
-			path: src/Current.php
+includes:
+	- phpstan-baseline.neon
