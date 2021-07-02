@@ -22,6 +22,8 @@ final class Identity
 {
     /**
      * @psalm-pure
+     *
+     * @psalm-return Closure(T): T
      */
     public static function of(): Closure
     {

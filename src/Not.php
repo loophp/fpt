@@ -15,24 +15,23 @@ use Closure;
 
 /**
  * @psalm-immutable
- *
- * @psalm-template T
- * @psalm-template U
  */
 final class Not
 {
     /**
      * @psalm-pure
+     *
+     * @return Closure(callable(mixed...): mixed): Closure(mixed): bool
      */
     public static function of(): Closure
     {
         return
             /**
-             * @psalm-param callable(...T): U $callable
+             * @psalm-param callable(mixed...): mixed $callable
              */
             static fn (callable $callable): Closure =>
                 /**
-                 * @psalm-param T ...$args
+                 * @psalm-param mixed ...$args
                  */
                 static fn (...$args): bool => !$callable(...$args);
     }

@@ -28,7 +28,6 @@ final class End
     {
         return
             /**
-             * @param mixed $ifEmpty
              * @psalm-param U $ifEmpty
              */
             static function ($ifEmpty): Closure {

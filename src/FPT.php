@@ -99,6 +99,10 @@ final class FPT implements FPTInterface
 
     /**
      * @psalm-pure
+     *
+     * @psalm-template T
+     *
+     * @psalm-return Closure(T): T
      */
     public static function identity(): Closure
     {
@@ -107,6 +111,12 @@ final class FPT implements FPTInterface
 
     /**
      * @psalm-pure
+     *
+     * @psalm-template TKey
+     * @psalm-template T
+     * @psalm-template U
+     *
+     * @psalm-return Closure(callable(T, TKey, iterable<TKey, T>): U)
      */
     public static function map(): Closure
     {
@@ -123,6 +133,11 @@ final class FPT implements FPTInterface
 
     /**
      * @psalm-pure
+     *
+     * @psalm-template T
+     * @psalm-template U
+     *
+     * @psalm-return Closure(callable(T...): U): Closure(mixed): bool
      */
     public static function not(): Closure
     {

@@ -97,50 +97,72 @@ final class Operator
                                     case self::OP_AND:
                                     case '&&':
                                         return $left && $right;
+
                                     case self::OP_MINUS:
                                         return $left - $right;
+
                                     case self::OP_PLUS:
                                         return $left + $right;
+
                                     case self::OP_MODULO:
                                         return $left % $right;
+
                                     case self::OP_DIV:
                                         return $left / $right;
+
                                     case self::OP_MULT:
                                         return $left * $right;
+
                                     case self::OP_OR:
                                     case '||':
                                         return $left || $right;
+
                                     case self::OP_XOR:
                                         return $left xor $right;
+
                                     case '<<':
                                         return $left << $right;
+
                                     case '>>':
                                         return $left >> $right;
+
                                     case '&':
                                         return $left & $right;
+
                                     case '|':
                                         return $left | $right;
+
                                     case '^':
                                         return $left ^ $right;
+
                                     case '>':
                                         return $left > $right;
+
                                     case '>=':
                                         return $left >= $right;
+
                                     case '<':
                                         return $left < $right;
+
                                     case '<=':
                                         return $left <= $right;
+
                                     case 'instanceof':
                                         return $left instanceof $right;
+
                                     case '!==':
                                         return $left !== $right;
+
                                     case '!=':
                                     case '<>':
-                                        return $left != $right;
+                                        return $left !== $right;
+
                                     case '===':
                                         return $left === $right;
+
                                     case '==':
                                         return $left !== $right;
+
                                     case '<=>':
                                         return $left <=> $right;
                         }

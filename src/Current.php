@@ -28,8 +28,7 @@ final class Current
     {
         return
             /**
-             * @param mixed $ifEmpty
-             * @psalm-param U $ifEmpty
+             * @psalm-param mixed $ifEmpty
              */
             static function ($ifEmpty): Closure {
                 return

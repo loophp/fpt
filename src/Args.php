@@ -39,7 +39,7 @@ final class Args
                     /**
                      * @psalm-param T ...$args
                      *
-                     * @psalm-return T
+                     * @psalm-return array<array-key, T>
                      */
                     static fn (...$args) => array_slice($args, $offset, $length, true);
     }

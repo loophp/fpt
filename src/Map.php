@@ -25,34 +25,24 @@ final class Map
 {
     /**
      * @psalm-pure
+     *
+     * @psalm-return Closure(callable(T, TKey, iterable<TKey, T>): U)
      */
     public static function of(): Closure
     {
         return
             /**
-             * @psalm-param callable(T|U, TKey, iterable<TKey, T>): U ...$callables
+             * @psalm-param callable(T, TKey, iterable<TKey, T>): U $callable
              */
-            static fn (callable ...$callables): Closure =>
+            static fn (callable $callable): Closure =>
                 /**
-                 * @psalm-param iterable<TKey, T> ...$iterables
+                 * @psalm-param iterable<TKey, T> $iterable
                  *
-                 * @psalm-return Generator<TKey, T|U>
+                 * @psalm-return Generator<TKey, U>
                  */
-                static function (iterable ...$iterables) use ($callables): Generator {
-                    foreach ($iterables as $iterable) {
-                        foreach ($iterable as $key => $item) {
-                            yield $key => array_reduce(
-                                $callables,
-                                /**
-                                 * @psalm-param T|U $accumulator
-                                 * @psalm-param callable(T|U, TKey, iterable<TKey, T>): U $callback
-                                 *
-                                 * @psalm-return U
-                                 */
-                                static fn ($accumulator, callable $callback) => $callback($accumulator, $key, $iterable),
-                                $item
-                            );
-                        }
+                static function (iterable $iterable) use ($callable): Generator {
+                    foreach ($iterable as $key => $item) {
+                        yield $key => $callable($item, $key, $iterable);
                     }
                 };
     }

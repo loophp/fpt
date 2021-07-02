@@ -31,7 +31,7 @@ final class Nary
              */
             static fn (int $count, int $offset = 0): Closure => static fn (callable $callable): Closure =>
             /**
-             * @param mixed ...$args
+             * @psalm-param mixed ...$args
              *
              * @return mixed
              */

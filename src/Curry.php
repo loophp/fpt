@@ -22,6 +22,7 @@ use function count;
 abstract class Curry
 {
     /**
+     * @template T
      * @psalm-pure
      */
     public static function of(): Closure
@@ -30,7 +31,12 @@ abstract class Curry
             /**
              * @psalm-param positive-int|null $arity
              */
-            static fn (callable $callable, ?int $arity = null): Closure => static fn (...$args) => static::curryN(
+            static fn (Closure $callable, ?int $arity = null): Closure =>
+            /**
+             * @psalm-param mixed ...$args
+             * @return mixed
+             */
+            static fn (...$args) => static::curryN(
                 ($arity ?? (new ReflectionFunction($callable))->getNumberOfRequiredParameters()) - count($args),
                 $callable,
                 static::getArguments([], $args)
@@ -45,10 +51,18 @@ abstract class Curry
      */
     abstract protected static function getArguments(array $args = [], array $argsNext = []): array;
 
+    /**
+     * @return mixed
+     */
     private static function curryN(int $numberOfArguments, callable $function, array $args = [])
     {
         return (0 >= $numberOfArguments)
             ? $function(...$args)
-            : static fn (...$argsNext) => self::curryN($numberOfArguments - count($argsNext), $function, static::getArguments($args, $argsNext));
+            :
+            /**
+             * @psalm-param mixed ...$argsNext
+             * @return mixed
+             */
+            static fn (...$argsNext) => self::curryN($numberOfArguments - count($argsNext), $function, static::getArguments($args, $argsNext));
     }
 }
