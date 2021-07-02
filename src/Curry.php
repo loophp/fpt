@@ -31,7 +31,7 @@ abstract class Curry
             /**
              * @psalm-param positive-int|null $arity
              */
-            static fn (Closure $callable, ?int $arity = null): Closure =>
+            static fn (callable $callable, ?int $arity = null): Closure =>
             /**
              * @psalm-param mixed ...$args
              * @return mixed
