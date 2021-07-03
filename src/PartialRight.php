@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace loophp\fpt;
 
+use Generator;
 use loophp\fpt\Contract\PartialAble;
 
 /**
@@ -25,10 +26,10 @@ final class PartialRight extends Partial implements PartialAble
      * @psalm-param list<T> $args
      * @psalm-param list<U> $argsNext
      *
-     * @psalm-return list<T|U>
+     * @psalm-return Generator<int, T|U>
      */
-    protected static function getArguments(array $args = [], array $argsNext = []): array
+    protected static function getArguments(array $args = [], array $argsNext = []): Generator
     {
-        return [...$args, ...$argsNext];
+        return yield from [...$args, ...$argsNext];
     }
 }

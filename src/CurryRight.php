@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace loophp\fpt;
 
+use Generator;
 use loophp\fpt\Contract\CurryAble;
 
 /**
@@ -19,8 +20,8 @@ final class CurryRight extends Curry implements CurryAble
     /**
      * @psalm-pure
      */
-    protected static function getArguments(array $args = [], array $argsNext = []): array
+    protected static function getArguments(array $args = [], array $argsNext = []): Generator
     {
-        return [...array_reverse($argsNext), ...$args];
+        return yield from [...array_reverse($argsNext), ...$args];
     }
 }

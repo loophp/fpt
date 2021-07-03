@@ -6,24 +6,14 @@ parameters:
 			path: src/Current.php
 
 		-
-			message: "#^Method loophp\\\\fpt\\\\Curry\\:\\:curryN\\(\\) has parameter \\$args with no value type specified in iterable type array\\.$#"
+			message: "#^Method loophp\\\\fpt\\\\Curry\\:\\:curryN\\(\\) has parameter \\$args with no typehint specified\\.$#"
 			count: 1
 			path: src/Curry.php
 
 		-
-			message: "#^Method loophp\\\\fpt\\\\Curry\\:\\:getArguments\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: "#^Parameter \\#1 \\$function of class ReflectionFunction constructor expects Closure\\|string, callable\\(\\)\\: mixed given\\.$#"
 			count: 1
 			path: src/Curry.php
-
-		-
-			message: "#^Method loophp\\\\fpt\\\\CurryLeft\\:\\:getArguments\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/CurryLeft.php
-
-		-
-			message: "#^Method loophp\\\\fpt\\\\CurryRight\\:\\:getArguments\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/CurryRight.php
 
 		-
 			message: "#^Foreach overwrites \\$ifEmpty with its value variable\\.$#"

@@ -27,11 +27,11 @@ final class Uncurry
         /**
          * @psalm-param mixed ...$xs
          */
-        static fn (...$xs) =>
-        array_reduce(
+        static fn (...$xs) => array_reduce(
             $xs,
             /**
              * @psalm-param mixed $item
+             *
              * @return mixed
              */
             static fn (callable $acc, $item) => $acc($item),

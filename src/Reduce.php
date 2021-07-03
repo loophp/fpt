@@ -29,18 +29,18 @@ final class Reduce
     {
         return
             /**
-             * @psalm-param callable(U, T, TKey, iterable<TKey, T>): U ...$callables
+             * @psalm-param callable(U, T, TKey, iterable<TKey, T>): U $callable
              */
-            static fn (callable ...$callables): Closure =>
+            static fn (callable $callable): Closure =>
                 /**
                  * @psalm-param U $accumulator
                  */
                 static fn ($accumulator): Closure =>
                     /**
-                     * @psalm-param iterable<TKey, T> ...$iterables
+                     * @psalm-param iterable<TKey, T> $iterable
                      *
                      * @psalm-return U
                      */
-                    static fn (iterable ...$iterables) => FPT::end()($accumulator)(FPT::reduction()(...$callables)($accumulator)(...$iterables));
+                    static fn (iterable $iterable) => FPT::end()($accumulator)(FPT::reduction()($callable)($accumulator)($iterable));
     }
 }

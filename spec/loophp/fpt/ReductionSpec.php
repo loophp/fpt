@@ -17,31 +17,25 @@ class ReductionSpec extends ObjectBehavior
 {
     public function it_can_reduction()
     {
-        $inputs = [
-            range('a', 'c'),
-            range('d', 'f'),
-        ];
+        $inputs = range('a', 'f');
 
-        $callbacks = [
-            static fn (string $acc, $item) => sprintf('%s%s', $item, $item),
-            static fn (string $acc, $item) => sprintf('[%s]', $acc),
-        ];
+        $callback = static fn (string $acc, $item) => sprintf('[%s]', $item);
 
         $generator = static function (): Generator {
-            yield 0 => '[aa]';
+            yield 0 => '[a]';
 
-            yield 1 => '[bb]';
+            yield 1 => '[b]';
 
-            yield 2 => '[cc]';
+            yield 2 => '[c]';
 
-            yield 0 => '[dd]';
+            yield 3 => '[d]';
 
-            yield 1 => '[ee]';
+            yield 4 => '[e]';
 
-            yield 2 => '[ff]';
+            yield 5 => '[f]';
         };
 
-        $this::of()(...$callbacks)('')(...$inputs)
+        $this::of()($callback)('')($inputs)
             ->shouldIterateAs($generator());
     }
 

@@ -4,6 +4,7 @@ imports:
 parameters:
     tasks.license.holder: Pol Dellaiera
     tasks.license.date_from: 2021
+    tasks.phpcsfixer.config: .php-cs-fixer.dist.php
     tasks.phpstan.configuration: phpstan.neon
     extra_tasks:
         phpspec:

@@ -30,31 +30,19 @@ final class Reduction
     {
         return
             /**
-             * @psalm-param callable(U, T, TKey, iterable<TKey, T>): U ...$callables
+             * @psalm-param callable(U, T, TKey, iterable<TKey, T>): U $callable
              */
-            static fn (callable ...$callables): Closure =>
+            static fn (callable $callable): Closure =>
                 /**
                  * @psalm-param U $accumulator
                  */
                 static fn ($accumulator): Closure =>
                     /**
-                     * @psalm-param iterable<TKey, T> ...$iterables
+                     * @psalm-param iterable<TKey, T> $iterable
                      */
-                    static function (iterable ...$iterables) use ($callables, $accumulator): Generator {
-                        foreach ($iterables as $iterable) {
-                            foreach ($iterable as $key => $item) {
-                                yield $key => ($accumulator = array_reduce(
-                                    $callables,
-                                    /**
-                                     * @psalm-param U $accumulator
-                                     * @psalm-param callable(U, T, TKey, iterable<TKey, T>): U $callback
-                                     *
-                                     * @psalm-return U
-                                     */
-                                    static fn ($accumulator, callable $callback) => $callback($accumulator, $item, $key, $iterable),
-                                    $accumulator
-                                ));
-                            }
+                    static function (iterable $iterable) use ($callable, $accumulator): Generator {
+                        foreach ($iterable as $key => $item) {
+                            yield $key => $accumulator = $callable($accumulator, $item, $key, $iterable);
                         }
                     };
     }

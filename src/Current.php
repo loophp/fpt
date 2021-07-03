@@ -29,6 +29,8 @@ final class Current
         return
             /**
              * @psalm-param mixed $ifEmpty
+             *
+             * @param mixed $ifEmpty
              */
             static function ($ifEmpty): Closure {
                 return

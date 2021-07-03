@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace loophp\fpt;
 
 use Closure;
+use Generator;
 use ReflectionFunction;
 
 use function count;
@@ -34,12 +35,13 @@ abstract class Curry
             static fn (callable $callable, ?int $arity = null): Closure =>
             /**
              * @psalm-param mixed ...$args
+             *
              * @return mixed
              */
             static fn (...$args) => static::curryN(
                 ($arity ?? (new ReflectionFunction($callable))->getNumberOfRequiredParameters()) - count($args),
                 $callable,
-                static::getArguments([], $args)
+                ...static::getArguments([], $args)
             );
     }
 
@@ -48,21 +50,24 @@ abstract class Curry
      *
      * @psalm-param list<mixed> $args
      * @psalm-param list<mixed> $argsNext
+     *
+     * @psalm-return Generator<int, mixed>
      */
-    abstract protected static function getArguments(array $args = [], array $argsNext = []): array;
+    abstract protected static function getArguments(array $args = [], array $argsNext = []): Generator;
 
     /**
      * @return mixed
      */
-    private static function curryN(int $numberOfArguments, callable $function, array $args = [])
+    private static function curryN(int $numberOfArguments, callable $function, ...$args)
     {
         return (0 >= $numberOfArguments)
             ? $function(...$args)
             :
             /**
              * @psalm-param mixed ...$argsNext
+             *
              * @return mixed
              */
-            static fn (...$argsNext) => self::curryN($numberOfArguments - count($argsNext), $function, static::getArguments($args, $argsNext));
+            static fn (...$argsNext) => self::curryN($numberOfArguments - count($argsNext), $function, ...static::getArguments($args, $argsNext));
     }
 }

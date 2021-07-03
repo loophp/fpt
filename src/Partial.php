@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace loophp\fpt;
 
 use Closure;
+use Generator;
 
 // phpcs:disable Generic.Files.LineLength.TooLong
 
@@ -53,7 +54,7 @@ abstract class Partial
      * @psalm-param list<T> $args
      * @psalm-param list<U> $argsNext
      *
-     * @psalm-return list<T|U>
+     * @psalm-return Generator<int, T|U>
      */
-    abstract protected static function getArguments(array $args = [], array $argsNext = []): array;
+    abstract protected static function getArguments(array $args = [], array $argsNext = []): Generator;
 }

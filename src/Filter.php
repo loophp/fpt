@@ -29,20 +29,18 @@ final class Filter
     {
         return
             /**
-             * @psalm-param callable(T, TKey, iterable<TKey, T>): bool ...$callables
+             * @psalm-param callable(T, TKey, iterable<TKey, T>): bool $callable
              */
-            static fn (callable ...$callables): Closure =>
+            static fn (callable $callable): Closure =>
                 /**
-                 * @psalm-param iterable<TKey, T> ...$iterables
+                 * @psalm-param iterable<TKey, T> $iterable
                  *
                  * @psalm-return Generator<TKey, T>
                  */
-                static function (iterable ...$iterables) use ($callables): Generator {
-                    foreach ($iterables as $iterable) {
-                        foreach ($iterable as $key => $value) {
-                            if (array_reduce($callables, static fn (bool $acc, callable $callback): bool => $acc || $callback($value, $key, $iterable), false)) {
-                                yield $key => $value;
-                            }
+                static function (iterable $iterable) use ($callable): Generator {
+                    foreach ($iterable as $key => $value) {
+                        if ($callable($value, $key, $iterable)) {
+                            yield $key => $value;
                         }
                     }
                 };
