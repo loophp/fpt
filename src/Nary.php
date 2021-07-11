@@ -29,12 +29,6 @@ final class Nary
             /**
              * @psalm-param positive-int $count
              */
-            static fn (int $count, int $offset = 0): Closure => static fn (callable $callable): Closure =>
-            /**
-             * @psalm-param mixed ...$args
-             *
-             * @return mixed
-             */
-            static fn (...$args) => $callable(...array_slice($args, $offset, $count));
+            static fn (int $count, int $offset = 0): Closure => static fn (callable $callable): Closure => static fn (mixed ...$args): mixed => $callable(...array_slice($args, $offset, $count));
     }
 }

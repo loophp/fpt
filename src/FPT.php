@@ -52,17 +52,9 @@ final class FPT implements FPTInterface
     /**
      * @psalm-pure
      */
-    public static function curryLeft(): Closure
+    public static function curry(): Closure
     {
-        return CurryLeft::of();
-    }
-
-    /**
-     * @psalm-pure
-     */
-    public static function curryRight(): Closure
-    {
-        return CurryRight::of();
+        return Curry::of();
     }
 
     /**
@@ -150,22 +142,6 @@ final class FPT implements FPTInterface
     public static function operator(): Closure
     {
         return Operator::of();
-    }
-
-    /**
-     * @psalm-pure
-     */
-    public static function partialLeft(): Closure
-    {
-        return PartialLeft::of();
-    }
-
-    /**
-     * @psalm-pure
-     */
-    public static function partialRight(): Closure
-    {
-        return PartialRight::of();
     }
 
     /**

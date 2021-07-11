@@ -41,6 +41,6 @@ final class Reduce
                      *
                      * @psalm-return U
                      */
-                    static fn (iterable $iterable) => FPT::end()($accumulator)(FPT::reduction()($callable)($accumulator)($iterable));
+                    static fn (iterable $iterable): mixed => FPT::end()($accumulator)(FPT::reduction()($callable)($accumulator)($iterable));
     }
 }

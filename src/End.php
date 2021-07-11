@@ -38,7 +38,7 @@ final class End
                      * @psalm-param iterable<T> $iterable
                      * @psalm-return T|U
                      */
-                    static function (iterable $iterable) use ($ifEmpty) {
+                    static function (iterable $iterable) use ($ifEmpty): mixed {
                         foreach ($iterable as $ifEmpty) {
                         }
 

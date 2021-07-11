@@ -29,10 +29,6 @@ final class Not
             /**
              * @psalm-param callable(mixed...): mixed $callable
              */
-            static fn (callable $callable): Closure =>
-                /**
-                 * @psalm-param mixed ...$args
-                 */
-                static fn (...$args): bool => !$callable(...$args);
+            static fn (callable $callable): Closure => static fn (mixed ...$args): bool => !$callable(...$args);
     }
 }

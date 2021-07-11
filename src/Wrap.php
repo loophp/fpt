@@ -23,12 +23,6 @@ final class Wrap
      */
     public static function of(): Closure
     {
-        return
-            /**
-             * @psalm-param T ...$values
-             *
-             * @psalm-return array<array-key, T>
-             */
-            static fn (...$values): array => $values;
+        return static fn (mixed ...$values): array => $values;
     }
 }

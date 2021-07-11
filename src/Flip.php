@@ -44,6 +44,6 @@ final class Flip
                  *
                  * @no-named-arguments
                  */
-                static fn ($a, $b, ...$rest) => $callable($b, $a, ...$rest);
+                static fn ($a, $b, ...$rest): mixed => $callable($b, $a, ...$rest);
     }
 }

@@ -33,6 +33,6 @@ final class Identity
              *
              * @psalm-return T
              */
-            static fn ($value) => $value;
+            static fn ($value): mixed => $value;
     }
 }

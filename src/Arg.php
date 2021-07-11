@@ -29,12 +29,6 @@ final class Arg
             /**
              * @psalm-param positive-int $index
              */
-            static fn (int $index): Closure =>
-                /**
-                 * @psalm-param T ...$args
-                 *
-                 * @psalm-return T
-                 */
-                static fn (...$args) => $args[$index];
+            static fn (int $index): Closure => static fn (mixed ...$args): mixed => $args[$index];
     }
 }

@@ -24,20 +24,6 @@ interface FPTInterface
     public static function compose(): Closure;
 
     /**
-     * Returns a curried equivalent of the provided function.
-     *
-     * @psalm-pure
-     */
-    public static function curryLeft(): Closure;
-
-    /**
-     * Returns a curried equivalent of the provided function.
-     *
-     * @psalm-pure
-     */
-    public static function curryRight(): Closure;
-
-    /**
      * Returns a new function much like the supplied one,
      * except that the first two arguments' order is reversed.
      *
@@ -81,16 +67,6 @@ interface FPTInterface
      * @psalm-pure
      */
     public static function operator(): Closure;
-
-    /**
-     * @psalm-pure
-     */
-    public static function partialLeft(): Closure;
-
-    /**
-     * @psalm-pure
-     */
-    public static function partialRight(): Closure;
 
     /**
      * Creates a thunk out of a function.

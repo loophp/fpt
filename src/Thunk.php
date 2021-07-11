@@ -31,6 +31,6 @@ final class Thunk
              *
              * @psalm-return Closure(): T
              */
-            static fn ($value): Closure => static fn () => $value;
+            static fn ($value): Closure => static fn (): mixed => $value;
     }
 }

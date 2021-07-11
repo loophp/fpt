@@ -23,18 +23,9 @@ final class Uncurry
      */
     public static function of(): Closure
     {
-        return static fn (callable $callable): Closure =>
-        /**
-         * @psalm-param mixed ...$xs
-         */
-        static fn (...$xs) => array_reduce(
+        return static fn (callable $callable): Closure => static fn (mixed ...$xs): mixed => array_reduce(
             $xs,
-            /**
-             * @psalm-param mixed $item
-             *
-             * @return mixed
-             */
-            static fn (callable $acc, $item) => $acc($item),
+            static fn (callable $acc, mixed $item): mixed => $acc($item),
             $callable
         );
     }
