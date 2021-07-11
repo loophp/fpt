@@ -79,46 +79,39 @@ class FPTSpec extends ObjectBehavior
             ->shouldReturn($foo);
     }
 
-    public function it_curryLeft()
+    public function it_curry_and_partial()
     {
-        $closure = 'explode';
-
-        $this::curryLeft()($closure)(':', 'a:b')
+        $this::curry()('explode')(',')('a,b,c')
             ->shouldReturn([
                 'a',
                 'b',
+                'c',
             ]);
 
-        $this::curryLeft()($closure)(':')('a:b', 1)
-            ->shouldReturn([
-                'a:b',
-            ]);
-
-        $closure = static fn ($a, $b, $c, $d): string => implode('', func_get_args());
-
-        $this::curryLeft()($closure)('d', 'e')('f', 'g')
-            ->shouldReturn('defg');
-    }
-
-    public function it_curryRight()
-    {
-        $closure = 'explode';
-
-        $this::curryRight()($closure)('a:b', ':')
+        $this::curry()('explode')(',', 'a,b,c')
             ->shouldReturn([
                 'a',
                 'b',
+                'c',
             ]);
 
-        $this::curryRight()($closure)(1)('a:b', ':')
+        $this::curry()('explode', 3)(',')('a,b,c')(2)
             ->shouldReturn([
-                'a:b',
+                'a',
+                'b,c',
             ]);
 
-        $closure = static fn ($a, $b, $c, $d): string => implode('', func_get_args());
+        $this::curry()('explode', 3)(',', 'a,b,c', 2)
+            ->shouldReturn([
+                'a',
+                'b,c',
+            ]);
 
-        $this::curryRight()($closure)('d', 'e')('f', 'g')
-            ->shouldReturn('gfed');
+        $this::curry()('strtoupper')('strtoupper')
+            ->shouldReturn('STRTOUPPER');
+
+        $this::curry()('strtoupper', 1)('strtoupper')
+            ->shouldReturn('STRTOUPPER');
     }
 
     public function it_end()
@@ -221,38 +214,6 @@ class FPTSpec extends ObjectBehavior
     {
         $this::operator()
             ->shouldReturnAnInstanceOf(Closure::class);
-    }
-
-    public function it_partialLeft()
-    {
-        $closure = 'explode';
-
-        $this::partialLeft()($closure)('a:b', 2)(':')
-            ->shouldReturn([
-                'a',
-                'b',
-            ]);
-
-        $this::partialLeft()($closure)(2)(':', 'a:b')
-            ->shouldReturn([
-                'a',
-                'b',
-            ]);
-
-        $closure = static fn ($a = 'a', $b = 'b', $c = 'c', $d = 'd'): string => implode('', func_get_args());
-
-        $this::partialLeft()($closure)('d', 'e')('f', 'g')
-            ->shouldReturn('fgde');
-    }
-
-    public function it_partialRight()
-    {
-        $closure = 'explode';
-
-        $closure = static fn ($a = 'a', $b = 'b', $c = 'c', $d = 'd'): string => implode('', func_get_args());
-
-        $this::partialRight()($closure)('d', 'e')('f', 'g')
-            ->shouldReturn('defg');
     }
 
     public function it_reduce()
