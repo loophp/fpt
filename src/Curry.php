@@ -16,33 +16,49 @@ use ReflectionFunction;
 use function count;
 
 /**
+ * Stateless "Curry" application.
+ *
  * @psalm-immutable
  *
  * phpcs:disable Generic.Files.LineLength.TooLong
  */
-abstract class Curry
+final class Curry
 {
     /**
-     * @template T
      * @psalm-pure
      */
     public static function of(): Closure
     {
         return
             /**
-             * @psalm-param positive-int|null $arity
+             * @param Closure|callable-string $callable
              */
-            static fn (callable $callable, ?int $arity = null): Closure =>
-            /**
-             * @psalm-param mixed ...$args
-             *
-             * @return mixed
-             */
-            static fn (...$args) => static::curryN(
-                ($arity ?? (new ReflectionFunction($callable))->getNumberOfRequiredParameters()) - count($args),
-                $callable,
-                ...static::getArguments([], $args)
-            );
+            static function (callable $callable, int $arity = 0, mixed ...$arguments): mixed {
+                if (0 === $arity) {
+                    $reflection = (new ReflectionFunction($callable));
+                    $parameters = $reflection->getNumberOfParameters();
+                    $requiredParameters = $reflection->getNumberOfRequiredParameters();
+                }
+
+                return self::curryN(
+                    $callable,
+                    $parameters ?? $arity,
+                    $requiredParameters ?? $arity,
+                    ...$arguments
+                );
+            };
+    }
+
+    /**
+     * @param Closure|callable-string $callable
+     */
+    private static function curryN(callable $callable, int $parameters, int $requiredParameters, mixed ...$arguments): mixed
+    {
+        return match (true) {
+            0 === $requiredParameters => static fn (): mixed => ($callable)(),
+            self::isComplete(count($arguments), $parameters, $requiredParameters) => ($callable)(...$arguments),
+            default => static fn (mixed ...$args): mixed => self::curryN($callable, $parameters, $requiredParameters, ...self::getArguments($arguments, $args))
+        };
     }
 
     /**
@@ -53,21 +69,13 @@ abstract class Curry
      *
      * @psalm-return Generator<int, mixed>
      */
-    abstract protected static function getArguments(array $args = [], array $argsNext = []): Generator;
-
-    /**
-     * @return mixed
-     */
-    private static function curryN(int $numberOfArguments, callable $function, ...$args)
+    private static function getArguments(array $args, array $argsNext): Generator
     {
-        return (0 >= $numberOfArguments)
-            ? $function(...$args)
-            :
-            /**
-             * @psalm-param mixed ...$argsNext
-             *
-             * @return mixed
-             */
-            static fn (...$argsNext) => self::curryN($numberOfArguments - count($argsNext), $function, ...static::getArguments($args, $argsNext));
+        return yield from array_merge($args, $argsNext);
+    }
+
+    private static function isComplete(int $arguments, int $parameters, int $requiredParameters): bool
+    {
+        return $arguments === $parameters || $arguments === $requiredParameters;
     }
 }

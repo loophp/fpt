@@ -52,6 +52,6 @@ final class Compose
                      *
                      * @psalm-return V
                      */
-                    static fn (...$x) => $f($g(...$x));
+                    static fn (...$x): mixed => $f($g(...$x));
     }
 }

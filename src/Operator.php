@@ -92,82 +92,33 @@ final class Operator
                      *
                      * @psalm-suppress PossiblyInvalidOperand
                      */
-                    static function ($right) use ($operator, $left) {
-                        switch ($operator) {
-                                    case self::OP_AND:
-                                    case '&&':
-                                        return $left && $right;
-
-                                    case self::OP_MINUS:
-                                        return $left - $right;
-
-                                    case self::OP_PLUS:
-                                        return $left + $right;
-
-                                    case self::OP_MODULO:
-                                        return $left % $right;
-
-                                    case self::OP_DIV:
-                                        return $left / $right;
-
-                                    case self::OP_MULT:
-                                        return $left * $right;
-
-                                    case self::OP_OR:
-                                    case '||':
-                                        return $left || $right;
-
-                                    case self::OP_XOR:
-                                        return $left xor $right;
-
-                                    case '<<':
-                                        return $left << $right;
-
-                                    case '>>':
-                                        return $left >> $right;
-
-                                    case '&':
-                                        return $left & $right;
-
-                                    case '|':
-                                        return $left | $right;
-
-                                    case '^':
-                                        return $left ^ $right;
-
-                                    case '>':
-                                        return $left > $right;
-
-                                    case '>=':
-                                        return $left >= $right;
-
-                                    case '<':
-                                        return $left < $right;
-
-                                    case '<=':
-                                        return $left <= $right;
-
-                                    case 'instanceof':
-                                        return $left instanceof $right;
-
-                                    case '!==':
-                                        return $left !== $right;
-
-                                    case '!=':
-                                    case '<>':
-                                        return $left != $right;
-
-                                    case '===':
-                                        return $left === $right;
-
-                                    case '==':
-                                        return $left == $right;
-
-                                    case '<=>':
-                                        return $left <=> $right;
-                        }
-
-                        throw new InvalidArgumentException('Unable to find the operator.');
+                    static function ($right) use ($operator, $left): mixed {
+                        return match ($operator) {
+                            self::OP_AND, '&&' => $left && $right,
+                            self::OP_MINUS => $left - $right,
+                            self::OP_PLUS => $left + $right,
+                            self::OP_MODULO => $left % $right,
+                            self::OP_DIV => $left / $right,
+                            self::OP_MULT => $left * $right,
+                            self::OP_OR, '||' => $left || $right,
+                            self::OP_XOR => $left xor $right,
+                            '<<' => $left << $right,
+                            '>>' => $left >> $right,
+                            '&' => $left & $right,
+                            '|' => $left | $right,
+                            '^' => $left ^ $right,
+                            '>' => $left > $right,
+                            '>=' => $left >= $right,
+                            '<' => $left < $right,
+                            '<=' => $left <= $right,
+                            'instanceof' => $left instanceof $right,
+                            '!==' => $left !== $right,
+                            '!=', '<>' => $left != $right,
+                            '===' => $left === $right,
+                            '==' => $left == $right,
+                            '<=>' => $left <=> $right,
+                            default => throw new InvalidArgumentException('Unable to find the operator.')
+                        };
                     };
     }
 }

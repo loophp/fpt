@@ -21,6 +21,10 @@ This projects doesn't aim to transform PHP into a full featured FP language,
 but it will helps users willing to use and understand a subset of FP concepts in
 their own code.
 
+## Requirements
+
+* PHP 8
+
 ## Installation
 
 ```shell
@@ -28,6 +32,62 @@ composer require loophp/fpt
 ```
 
 ## Usage
+
+### Curry and Partial
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Example;
+
+include __DIR__ . '/vendor/autoload.php';
+
+use loophp\fpt\FPT;
+
+// The "curry" method combine at the same time the
+// Curry and Partial, see example below.
+$explode = FPT::curry()('explode');
+
+// Thanks to the new PHP 8 feature "named arguments",
+// you can pass arguments in any order.
+
+var_dump($explode(',', 'a,b,c'));
+var_dump($explode(separator: ',', string: 'a,b,c'));
+var_dump($explode(separator: ',')(string: 'a,b,c'));
+var_dump($explode(string: 'a,b,c', separator: ','));
+var_dump($explode(string: 'a,b,c')(separator: ','));
+
+// All of these will return:
+/**
+ * array(3) {
+ *   [0] => string(1) "a"
+ *   [1] => string(1) "b"
+ *   [2] => string(1) "c"
+ * }
+*/
+
+// You can pass an optional "arity" argument
+
+$explode = FPT::curry()('explode', 3);
+
+var_dump($explode(',', 'a,b,c', 2));
+var_dump($explode(separator: ',', string: 'a,b,c', limit: 2));
+var_dump($explode(separator: ',')(string: 'a,b,c')(limit: 2));
+var_dump($explode(limit: 2, string: 'a,b,c', separator: ','));
+var_dump($explode(limit: 2)(string: 'a,b,c')(separator: ','));
+
+// All of these will return:
+/**
+ * array(2) {
+ *   [0] => string(1) "a"
+ *   [1] => string(3) "b,c"
+ * }
+*/
+```
+
+### Composition
 
 ```php
 <?php
