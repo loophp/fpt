@@ -54,9 +54,11 @@ final class Curry
      */
     private static function curryN(callable $callable, int $parameters, int $requiredParameters, mixed ...$arguments): mixed
     {
+        $countArguments = count($arguments);
+
         return match (true) {
             0 === $requiredParameters => static fn (): mixed => ($callable)(),
-            self::isComplete(count($arguments), $parameters, $requiredParameters) => ($callable)(...$arguments),
+            $countArguments >= $parameters, $countArguments >= $requiredParameters => ($callable)(...$arguments),
             default => static fn (mixed ...$args): mixed => self::curryN($callable, $parameters, $requiredParameters, ...self::getArguments($arguments, $args))
         };
     }
@@ -72,10 +74,5 @@ final class Curry
     private static function getArguments(array $args, array $argsNext): Generator
     {
         return yield from array_merge($args, $argsNext);
-    }
-
-    private static function isComplete(int $arguments, int $parameters, int $requiredParameters): bool
-    {
-        return $arguments === $parameters || $arguments === $requiredParameters;
     }
 }

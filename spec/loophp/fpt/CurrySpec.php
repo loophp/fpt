@@ -14,6 +14,12 @@ use PhpSpec\ObjectBehavior;
 
 class CurrySpec extends ObjectBehavior
 {
+    public function it_can_curry_a_binary_method_and_provide_more_parameters_than_needed()
+    {
+        $this::of()('sprintf', 3)('%s%s%s')('a', 'b', 'c', 'd')
+            ->shouldReturn('abc');
+    }
+
     public function it_can_curry_a_method_with_a_multiple_arguments()
     {
         $this::of()('explode')(',')('a,b,c')
