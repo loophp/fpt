@@ -39,6 +39,7 @@ final class Curry
                     $reflection = (new ReflectionFunction($callable));
                     $parameters = $reflection->getNumberOfParameters();
                     $requiredParameters = $reflection->getNumberOfRequiredParameters();
+                    $arity = $parameters === $requiredParameters ? $parameters : $arity;
                 }
 
                 return self::curryN(

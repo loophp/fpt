@@ -36,6 +36,12 @@ class CurrySpec extends ObjectBehavior
             ->shouldReturn(['a', 'b', 'c']);
     }
 
+    public function it_can_curry_a_method_and_automatically_set_the_arity_based_on_parameters_and_required_parameters()
+    {
+        $this::of()('is_iterable')(['a', 'b', 'c'])
+            ->shouldReturn(true);
+    }
+
     public function it_can_curry_a_method_and_provide_the_right_amount_of_parameters_when_the_arity_is_set()
     {
         $fun = static fn ($a, $b, ...$rest): int => count(func_get_args());
