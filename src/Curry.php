@@ -13,6 +13,7 @@ use Closure;
 use Generator;
 use ReflectionFunction;
 
+use function array_slice;
 use function count;
 
 /**
@@ -42,6 +43,7 @@ final class Curry
 
                 return self::curryN(
                     $callable,
+                    $arity,
                     $parameters ?? $arity,
                     $requiredParameters ?? $arity,
                     ...$arguments
@@ -52,14 +54,14 @@ final class Curry
     /**
      * @param Closure|callable-string $callable
      */
-    private static function curryN(callable $callable, int $parameters, int $requiredParameters, mixed ...$arguments): mixed
+    private static function curryN(callable $callable, int $arity, int $parameters, int $requiredParameters, mixed ...$arguments): mixed
     {
         $countArguments = count($arguments);
 
         return match (true) {
             0 === $requiredParameters => static fn (): mixed => ($callable)(),
-            $countArguments >= $parameters, $countArguments >= $requiredParameters => ($callable)(...$arguments),
-            default => static fn (mixed ...$args): mixed => self::curryN($callable, $parameters, $requiredParameters, ...self::getArguments($arguments, $args))
+            $countArguments >= $parameters, $countArguments >= $requiredParameters => ($callable)(...array_slice($arguments, 0, 0 !== $arity ? $arity : $countArguments)),
+            default => static fn (mixed ...$args): mixed => self::curryN($callable, $arity, $parameters, $requiredParameters, ...self::getArguments($arguments, $args))
         };
     }
 
