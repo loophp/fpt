@@ -18,7 +18,7 @@ use loophp\fpt\Contract\FPTInterface;
 final class FPT implements FPTInterface
 {
     /**
-     * @psalm-pure
+     * @pure
      */
     public static function arg(): Closure
     {
@@ -26,7 +26,7 @@ final class FPT implements FPTInterface
     }
 
     /**
-     * @psalm-pure
+     * @pure
      */
     public static function args(): Closure
     {
@@ -34,7 +34,7 @@ final class FPT implements FPTInterface
     }
 
     /**
-     * @psalm-pure
+     * @pure
      */
     public static function compose(): Closure
     {
@@ -42,7 +42,7 @@ final class FPT implements FPTInterface
     }
 
     /**
-     * @psalm-pure
+     * @pure
      */
     public static function current(): Closure
     {
@@ -50,7 +50,7 @@ final class FPT implements FPTInterface
     }
 
     /**
-     * @psalm-pure
+     * @pure
      */
     public static function curry(): Closure
     {
@@ -58,7 +58,7 @@ final class FPT implements FPTInterface
     }
 
     /**
-     * @psalm-pure
+     * @pure
      */
     public static function end(): Closure
     {
@@ -66,7 +66,7 @@ final class FPT implements FPTInterface
     }
 
     /**
-     * @psalm-pure
+     * @pure
      */
     public static function filter(): Closure
     {
@@ -74,7 +74,7 @@ final class FPT implements FPTInterface
     }
 
     /**
-     * @psalm-pure
+     * @pure
      */
     public static function flip(): Closure
     {
@@ -82,7 +82,7 @@ final class FPT implements FPTInterface
     }
 
     /**
-     * @psalm-pure
+     * @pure
      */
     public static function fold(): Closure
     {
@@ -90,11 +90,11 @@ final class FPT implements FPTInterface
     }
 
     /**
-     * @psalm-pure
+     * @pure
      *
-     * @psalm-template T
+     * @template T
      *
-     * @psalm-return Closure(T): T
+     * @return Closure(T): T
      */
     public static function identity(): Closure
     {
@@ -102,13 +102,13 @@ final class FPT implements FPTInterface
     }
 
     /**
-     * @psalm-pure
+     * @pure
      *
-     * @psalm-template TKey
-     * @psalm-template T
-     * @psalm-template U
+     * @template TKey
+     * @template T
+     * @template U
      *
-     * @psalm-return Closure(callable(T, TKey, iterable<TKey, T>): U)
+     * @return Closure(callable(T, TKey, iterable<TKey, T>): U)
      */
     public static function map(): Closure
     {
@@ -116,7 +116,7 @@ final class FPT implements FPTInterface
     }
 
     /**
-     * @psalm-pure
+     * @pure
      */
     public static function nary(): Closure
     {
@@ -124,12 +124,12 @@ final class FPT implements FPTInterface
     }
 
     /**
-     * @psalm-pure
+     * @pure
      *
-     * @psalm-template T
-     * @psalm-template U
+     * @template T
+     * @template U
      *
-     * @psalm-return Closure(callable(T...): U): Closure(mixed): bool
+     * @return Closure(callable(T...): U): Closure(mixed): bool
      */
     public static function not(): Closure
     {
@@ -137,7 +137,7 @@ final class FPT implements FPTInterface
     }
 
     /**
-     * @psalm-pure
+     * @pure
      */
     public static function operator(): Closure
     {
@@ -145,7 +145,7 @@ final class FPT implements FPTInterface
     }
 
     /**
-     * @psalm-pure
+     * @pure
      */
     public static function reduce(): Closure
     {
@@ -153,7 +153,7 @@ final class FPT implements FPTInterface
     }
 
     /**
-     * @psalm-pure
+     * @pure
      */
     public static function reduction(): Closure
     {
@@ -161,7 +161,7 @@ final class FPT implements FPTInterface
     }
 
     /**
-     * @psalm-pure
+     * @pure
      */
     public static function thunk(): Closure
     {
@@ -169,7 +169,7 @@ final class FPT implements FPTInterface
     }
 
     /**
-     * @psalm-pure
+     * @pure
      */
     public static function uncurry(): Closure
     {
@@ -177,7 +177,7 @@ final class FPT implements FPTInterface
     }
 
     /**
-     * @psalm-pure
+     * @pure
      */
     public static function wrap(): Closure
     {

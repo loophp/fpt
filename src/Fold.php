@@ -19,7 +19,7 @@ use Closure;
 final class Fold
 {
     /**
-     * @psalm-pure
+     * @pure
      */
     public static function of(): Closure
     {

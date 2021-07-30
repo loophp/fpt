@@ -16,27 +16,26 @@ use Closure;
 /**
  * @psalm-immutable
  *
- * @psalm-template T
- * @psalm-template U
+ * @template T
+ * @template U
  */
 final class Current
 {
     /**
-     * @psalm-pure
+     * @pure
      */
     public static function of(): Closure
     {
         return
             /**
-             * @psalm-param mixed $ifEmpty
-             *
-             * @param mixed $ifEmpty
+             * @param U $ifEmpty
              */
-            static function ($ifEmpty): Closure {
+            static function (mixed $ifEmpty): Closure {
                 return
                     /**
-                     * @psalm-param iterable<T> $iterable
-                     * @psalm-return T|U
+                     * @param iterable<T> $iterable
+                     *
+                     * @return T|U
                      */
                     static function (iterable $iterable) use ($ifEmpty): mixed {
                         foreach ($iterable as $ifEmpty) {

@@ -14,12 +14,12 @@ use Closure;
 /**
  * @psalm-immutable
  *
- * @psalm-template T
+ * @template T
  */
 final class Wrap
 {
     /**
-     * @psalm-pure
+     * @pure
      */
     public static function of(): Closure
     {

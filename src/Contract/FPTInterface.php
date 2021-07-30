@@ -19,7 +19,7 @@ interface FPTInterface
      * The last argument may have any arity; the remaining arguments must be unary.
      * The result of compose is not automatically curried.
      *
-     * @psalm-pure
+     * @pure
      */
     public static function compose(): Closure;
 
@@ -27,7 +27,7 @@ interface FPTInterface
      * Returns a new function much like the supplied one,
      * except that the first two arguments' order is reversed.
      *
-     * @psalm-pure
+     * @pure
      */
     public static function flip(): Closure;
 
@@ -37,7 +37,7 @@ interface FPTInterface
      * passing it an accumulator value and the current value from the array,
      * and then passing the result to the next call.
      *
-     * @psalm-pure
+     * @pure
      */
     public static function fold(): Closure;
 
@@ -45,7 +45,7 @@ interface FPTInterface
      * A function that does nothing but return the parameter supplied to it.
      * Good as a default or placeholder function.
      *
-     * @psalm-pure
+     * @pure
      */
     public static function identity(): Closure;
 
@@ -54,17 +54,17 @@ interface FPTInterface
      * exactly n parameters.
      * Any extraneous parameters will not be passed to the supplied function.
      *
-     * @psalm-pure
+     * @pure
      */
     public static function nary(): Closure;
 
     /**
-     * @psalm-pure
+     * @pure
      */
     public static function not(): Closure;
 
     /**
-     * @psalm-pure
+     * @pure
      */
     public static function operator(): Closure;
 
@@ -73,14 +73,14 @@ interface FPTInterface
      *
      * A thunk delays a calculation until its result is needed, providing lazy evaluation of arguments.
      *
-     * @psalm-pure
+     * @pure
      */
     public static function thunk(): Closure;
 
     /**
      * Returns a function of arity n from a curried function.
      *
-     * @psalm-pure
+     * @pure
      */
     public static function uncurry(): Closure;
 }

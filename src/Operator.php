@@ -66,33 +66,30 @@ final class Operator
     public const OP_XOR = 'xor';
 
     /**
-     * @psalm-pure
+     * @pure
      *
-     * @psalm-return pure-Closure(string): Closure(bool|numeric): Closure(bool|numeric): (bool|numeric)
+     * @return pure-Closure(string): Closure(mixed): Closure(mixed): (bool|int|numeric)
      */
     public static function of(): Closure
     {
         return
             /**
-             * @psalm-return pure-Closure(bool|numeric): Closure(bool|numeric): (bool|numeric)
+             * @return pure-Closure(mixed): Closure(mixed): (bool|int|numeric)
              */
             static fn (string $operator): Closure =>
                 /**
-                 * @psalm-param bool|numeric $left
+                 * @param mixed $left
                  *
-                 * @psalm-return pure-Closure(bool|numeric): (bool|numeric)
+                 * @return pure-Closure(mixed): (bool|int|numeric)
                  */
-                static fn ($left): Closure =>
+                static fn (mixed $left): Closure =>
                     /**
-                     * @psalm-param bool|numeric $right
-                     *
-                     * @param mixed $right
-                     *
-                     * @psalm-return bool|int|numeric
+                     * @return bool|int|numeric
                      *
                      * @psalm-suppress PossiblyInvalidOperand
+                     * @psalm-suppress InvalidOperand
                      */
-                    static function ($right) use ($operator, $left): mixed {
+                    static function (mixed $right) use ($operator, $left): mixed {
                         return match ($operator) {
                             self::OP_AND, '&&' => $left && $right,
                             self::OP_MINUS => $left - $right,

@@ -15,30 +15,30 @@ use Generator;
 // phpcs:disable Generic.Files.LineLength.TooLong
 
 /**
- * @psalm-template TKey
- * @psalm-template T
- * @psalm-template U
+ * @template TKey
+ * @template T
+ * @template U
  *
  * @psalm-immutable
  */
 final class Map
 {
     /**
-     * @psalm-pure
+     * @pure
      *
-     * @psalm-return Closure(callable(T, TKey, iterable<TKey, T>): U)
+     * @return Closure(callable(T, TKey, iterable<TKey, T>): U)
      */
     public static function of(): Closure
     {
         return
             /**
-             * @psalm-param callable(T, TKey, iterable<TKey, T>): U $callable
+             * @param callable(T, TKey, iterable<TKey, T>): U $callable
              */
             static fn (callable $callable): Closure =>
                 /**
-                 * @psalm-param iterable<TKey, T> $iterable
+                 * @param iterable<TKey, T> $iterable
                  *
-                 * @psalm-return Generator<TKey, U>
+                 * @return Generator<TKey, U>
                  */
                 static function (iterable $iterable) use ($callable): Generator {
                     foreach ($iterable as $key => $item) {

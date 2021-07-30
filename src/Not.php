@@ -19,7 +19,7 @@ use Closure;
 final class Not
 {
     /**
-     * @psalm-pure
+     * @pure
      *
      * @return Closure(callable(mixed...): mixed): Closure(mixed): bool
      */
@@ -27,7 +27,7 @@ final class Not
     {
         return
             /**
-             * @psalm-param callable(mixed...): mixed $callable
+             * @param callable(mixed...): mixed $callable
              */
             static fn (callable $callable): Closure => static fn (mixed ...$args): bool => !$callable(...$args);
     }

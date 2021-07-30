@@ -26,7 +26,7 @@ use function count;
 final class Curry
 {
     /**
-     * @psalm-pure
+     * @pure
      */
     public static function of(): Closure
     {
@@ -67,12 +67,12 @@ final class Curry
     }
 
     /**
-     * @psalm-pure
+     * @pure
      *
-     * @psalm-param list<mixed> $args
-     * @psalm-param list<mixed> $argsNext
+     * @param list<mixed> $args
+     * @param list<mixed> $argsNext
      *
-     * @psalm-return Generator<int, mixed>
+     * @return Generator<int, mixed>
      */
     private static function getArguments(array $args, array $argsNext): Generator
     {

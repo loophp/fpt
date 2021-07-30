@@ -16,18 +16,18 @@ use Closure;
 /**
  * @psalm-immutable
  *
- * @psalm-template T
+ * @template T
  */
 final class Arg
 {
     /**
-     * @psalm-pure
+     * @pure
      */
     public static function of(): Closure
     {
         return
             /**
-             * @psalm-param positive-int $index
+             * @param positive-int $index
              */
             static fn (int $index): Closure => static fn (mixed ...$args): mixed => $args[$index];
     }

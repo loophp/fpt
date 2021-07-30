@@ -18,28 +18,28 @@ use function array_slice;
 /**
  * @psalm-immutable
  *
- * @psalm-template T
+ * @template T
  */
 final class Args
 {
     /**
-     * @psalm-pure
+     * @pure
      */
     public static function of(): Closure
     {
         return
             /**
-             * @psalm-param positive-int $index
+             * @param positive-int $index
              */
             static fn (int $offset): Closure =>
                 /**
-                 * @psalm-param positive-int $index
+                 * @param positive-int $index
                  */
                 static fn (int $length): Closure =>
                     /**
-                     * @psalm-param T ...$args
+                     * @param T ...$args
                      *
-                     * @psalm-return array<array-key, T>
+                     * @return array<array-key, T>
                      */
                     static fn (...$args): array => array_slice($args, $offset, $length, true);
     }

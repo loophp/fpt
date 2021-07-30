@@ -17,25 +17,25 @@ use Generator;
 /**
  * @psalm-immutable
  *
- * @psalm-template TKey
- * @psalm-template T
+ * @template TKey
+ * @template T
  */
 final class Filter
 {
     /**
-     * @psalm-pure
+     * @pure
      */
     public static function of(): Closure
     {
         return
             /**
-             * @psalm-param callable(T, TKey, iterable<TKey, T>): bool $callable
+             * @param callable(T, TKey, iterable<TKey, T>): bool $callable
              */
             static fn (callable $callable): Closure =>
                 /**
-                 * @psalm-param iterable<TKey, T> $iterable
+                 * @param iterable<TKey, T> $iterable
                  *
-                 * @psalm-return Generator<TKey, T>
+                 * @return Generator<TKey, T>
                  */
                 static function (iterable $iterable) use ($callable): Generator {
                     foreach ($iterable as $key => $value) {

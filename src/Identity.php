@@ -16,22 +16,22 @@ use Closure;
  *
  * @psalm-immutable
  *
- * @psalm-template T
+ * @template T
  */
 final class Identity
 {
     /**
-     * @psalm-pure
+     * @pure
      *
-     * @psalm-return Closure(T): T
+     * @return Closure(T): T
      */
     public static function of(): Closure
     {
         return
             /**
-             * @psalm-param T $value
+             * @param T $value
              *
-             * @psalm-return T
+             * @return T
              */
             static fn ($value): mixed => $value;
     }

@@ -16,31 +16,31 @@ use Closure;
  *
  * phpcs:disable Generic.Files.LineLength.TooLong
  *
- * @psalm-template T
- * @psalm-template U
- * @psalm-template V
- * @psalm-template W
+ * @template T
+ * @template U
+ * @template V
+ * @template W
  *
  * @psalm-immutable
  */
 final class Flip
 {
     /**
-     * @psalm-pure
+     * @pure
      */
     public static function of(): Closure
     {
         return
             /**
-             * @psalm-param callable(U, T, ...V): W $callable
+             * @param callable(U, T, ...V): W $callable
              *
-             * @psalm-return callable(T, U, ...V): W
+             * @return callable(T, U, ...V): W
              */
             static fn (callable $callable): Closure =>
                 /**
-                 * @psalm-param T $a
-                 * @psalm-param U $b
-                 * @psalm-param V ...$rest
+                 * @param T $a
+                 * @param U $b
+                 * @param V ...$rest
                  *
                  * @no-named-arguments
                  */

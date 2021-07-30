@@ -15,30 +15,30 @@ use Generator;
 // phpcs:disable Generic.Files.LineLength.TooLong
 
 /**
- * @psalm-template TKey
- * @psalm-template T
- * @psalm-template U
+ * @template TKey
+ * @template T
+ * @template U
  *
  * @psalm-immutable
  */
 final class Reduction
 {
     /**
-     * @psalm-pure
+     * @pure
      */
     public static function of(): Closure
     {
         return
             /**
-             * @psalm-param callable(U, T, TKey, iterable<TKey, T>): U $callable
+             * @param callable(U, T, TKey, iterable<TKey, T>): U $callable
              */
             static fn (callable $callable): Closure =>
                 /**
-                 * @psalm-param U $accumulator
+                 * @param U $accumulator
                  */
                 static fn ($accumulator): Closure =>
                     /**
-                     * @psalm-param iterable<TKey, T> $iterable
+                     * @param iterable<TKey, T> $iterable
                      */
                     static function (iterable $iterable) use ($callable, $accumulator): Generator {
                         foreach ($iterable as $key => $item) {

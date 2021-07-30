@@ -16,35 +16,38 @@ use Closure;
 /**
  * @psalm-immutable
  *
- * @psalm-template T
- * @psalm-template U
- * @psalm-template V
+ * @template T
+ * @template U
+ * @template V
  */
 final class Compose
 {
     /**
-     * @psalm-pure
+     * @pure
      */
     public static function of(): Closure
     {
         return Fold::of()(Compose::of1())(Identity::of());
     }
 
+    /**
+     * @pure
+     */
     private static function of1(): Closure
     {
         return
             /**
-             * @psalm-param callable(U): V $f
+             * @param callable(U): V $f
              */
             static fn (callable $f): Closure =>
             /**
-             * @psalm-param callable(...T): U $g
+             * @param callable(...T): U $g
              */
             static fn (callable $g): Closure =>
             /**
-             * @psalm-param T ...$x
+             * @param T ...$x
              *
-             * @psalm-return V
+             * @return V
              */
             static fn (...$x): mixed => $f($g(...$x));
     }

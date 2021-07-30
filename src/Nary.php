@@ -21,13 +21,13 @@ use function array_slice;
 final class Nary
 {
     /**
-     * @psalm-pure
+     * @pure
      */
     public static function of(): Closure
     {
         return
             /**
-             * @psalm-param positive-int $count
+             * @param positive-int $count
              */
             static fn (int $count, int $offset = 0): Closure => static fn (callable $callable): Closure => static fn (mixed ...$args): mixed => $callable(...array_slice($args, $offset, $count));
     }

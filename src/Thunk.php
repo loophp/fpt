@@ -16,20 +16,20 @@ use Closure;
  *
  * @psalm-immutable
  *
- * @psalm-template T
+ * @template T
  */
 final class Thunk
 {
     /**
-     * @psalm-pure
+     * @pure
      */
     public static function of(): Closure
     {
         return
             /**
-             * @psalm-param T $value
+             * @param T $value
              *
-             * @psalm-return Closure(): T
+             * @return Closure(): T
              */
             static fn ($value): Closure => static fn (): mixed => $value;
     }
