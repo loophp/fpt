@@ -27,13 +27,7 @@ final class Compose
      */
     public static function of(): Closure
     {
-        return
-            /**
-             * @psalm-param (callable(U):V)|(callable(T):U) ...$fs
-             *
-             * @psalm-return Closure
-             */
-            static fn (callable ...$fs): Closure => Fold::of()(Compose::of1())(Identity::of())(...$fs);
+        return Fold::of()(Compose::of1())(Identity::of());
     }
 
     private static function of1(): Closure
@@ -43,15 +37,15 @@ final class Compose
              * @psalm-param callable(U): V $f
              */
             static fn (callable $f): Closure =>
-                /**
-                 * @psalm-param callable(...T): U $g
-                 */
-                static fn (callable $g): Closure =>
-                    /**
-                     * @psalm-param T ...$x
-                     *
-                     * @psalm-return V
-                     */
-                    static fn (...$x): mixed => $f($g(...$x));
+            /**
+             * @psalm-param callable(...T): U $g
+             */
+            static fn (callable $g): Closure =>
+            /**
+             * @psalm-param T ...$x
+             *
+             * @psalm-return V
+             */
+            static fn (...$x): mixed => $f($g(...$x));
     }
 }
