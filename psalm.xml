@@ -6,10 +6,15 @@
     errorBaseline="psalm-baseline.xml"
 >
     <projectFiles>
-        <directory name="src" />
+        <directory name="src"/>
+        <directory name="tests"/>
         <ignoreFiles>
-            <directory name="vendor" />
-            <directory name="spec" />
+            <directory name="vendor"/>
+            <directory name="spec"/>
         </ignoreFiles>
     </projectFiles>
+
+    <plugins>
+        <pluginClass class="loophp\fpt\Psalm\Plugin" />
+    </plugins>
 </psalm>
